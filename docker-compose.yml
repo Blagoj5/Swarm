@@ -13,13 +13,14 @@ services:
       - drupal-profiles:/var/www/html/profiles
       - drupal-themes:/var/www/html/themes
       - drupal-sites:/var/www/html/sites
-    secrets:
-      - psql_pass
+   
  
   postgres:
     image: postgres:10
     environment:
-      - POSTGRES_PASSWORD=/run/secrets/psql_pass
+      - POSTGRES_PASSWORD=/run/secrets/psql_password
+    secrets:
+      - psql_password
     volumes:
       - drupal-data:/var/lib/postgresql/data  
       
@@ -32,5 +33,5 @@ volumes:
   #FOR NAMING VOLUMES
 
 secrets:
-  psql_pass:
+  psql_password:
     external: true
